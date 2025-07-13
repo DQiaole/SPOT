@@ -4,6 +4,8 @@
 > Qiaole Dong, Yanwei Fu        
 > **ICCV 2025**
 
+<video src="assets/night-race-our.mp4" autoplay="true" controls="controls" width="856" height="480"></video>
+
 ## TODO
 
 Release training codes
