@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Online Dense Point Tracking with Streaming Memory.">
+  <meta name="keywords" content="Point Tracking">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Online Dense Point Tracking with Streaming Memory</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+<!--  <link rel="icon" href="./static/images/favicon.svg">-->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://github.com/DQiaole">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Online Dense Point Tracking with Streaming Memory</h1>
+          <h2><font color="gray" size="5">ICCV 2025</font></h2>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://dqiaole.github.io/">Qiaole Dong</a> and </span>
+            <span class="author-block">
+              <a href="http://yanweifu.github.io/">Yanwei Fu</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Fudan University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2503.06471"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+<!--              <span class="link-block">-->
+<!--                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="fab fa-youtube"></i>-->
+<!--                  </span>-->
+<!--                  <span>Video</span>-->
+<!--                </a>-->
+<!--              </span>-->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/DQiaole/SPOT"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+<!--              <span class="link-block">-->
+<!--                <a href="https://github.com/google/nerfies/releases/tag/0.1"-->
+<!--                   class="external-link button is-normal is-rounded is-dark">-->
+<!--                  <span class="icon">-->
+<!--                      <i class="far fa-images"></i>-->
+<!--                  </span>-->
+<!--                  <span>Data</span>-->
+<!--                  </a>-->
+<!--              </span>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Dense point tracking is a challenging task requiring the continuous tracking of every point in the initial 
+            frame throughout a substantial portion of a video, even in the presence of occlusions. Traditional methods use 
+            optical flow models to directly estimate long-range motion, but they often suffer from appearance drifting without 
+            considering temporal consistency. Recent point tracking algorithms usually depend on sliding windows for indirect 
+            information propagation from the first frame to the current one, which is slow and less effective for long-range 
+            tracking. To account for temporal consistency and enable efficient information propagation, we present a 
+            lightweight and fast model with Streaming memory for dense POint Tracking and online video processing. The SPOT 
+            framework features three core components: a customized memory reading module for feature enhancement, a sensory 
+            memory for short-term motion dynamics modeling, and a visibility-guided splatting module for accurate information 
+            propagation. This combination enables SPOT to perform dense point tracking with state-of-the-art accuracy on the 
+            CVO benchmark, as well as comparable or superior performance to offline models on sparse tracking benchmarks 
+            such as TAP-Vid and RoboTAP. Notably, SPOT with 10$\times$ smaller parameter numbers operates at least 2x faster 
+            than previous state-of-the-art models while maintaining the best performance on CVO.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+<!--    <div class="columns is-centered has-text-centered">-->
+<!--      <div class="column is-four-fifths">-->
+<!--        <h2 class="title is-3">Video</h2>-->
+<!--        <div class="publication-video">-->
+<!--          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"-->
+<!--                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+         <center>
+        <h2 class="title is-3">Qualitative Results</h2>
+        <table>
+    <thead>
+      <tr>
+        <th>SPOT</th>
+        <th>Online TAPIR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Row 1 -->
+      <tr>
+        <td>
+          <video controls>
+            <source src="assets/car-turn-our.mp4" type="video/mp4">
+          </video>
+        </td>
+        <td>
+          <video controls>
+            <source src="assets/car-turn-tpair.mp4" type="video/mp4">
+          </video>
+        </td>
+      </tr>
+      <!-- Row 2 -->
+       <tr>
+        <td>
+          <video controls>
+            <source src="assets/cows-our.mp4" type="video/mp4">
+          </video>
+        </td>
+        <td>
+          <video controls>
+            <source src="assets/cows-tpair.mp4" type="video/mp4">
+          </video>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <video controls>
+            <source src="assets/dogs-jump-our.mp4" type="video/mp4">
+          </video>
+        </td>
+        <td>
+          <video controls>
+            <source src="assets/dogs-jump-tpair.mp4" type="video/mp4">
+          </video>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <video controls>
+            <source src="assets/drift-chicane-our.mp4" type="video/mp4">
+          </video>
+        </td>
+        <td>
+          <video controls>
+            <source src="assets/drift-chicane-tpair.mp4" type="video/mp4">
+          </video>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <video controls>
+            <source src="assets/drift-straight-our.mp4" type="video/mp4">
+          </video>
+        </td>
+        <td>
+          <video controls>
+            <source src="assets/drift-straight-tpair.mp4" type="video/mp4">
+          </video>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <video controls>
+            <source src="assets/drift-turn-our.mp4" type="video/mp4">
+          </video>
+        </td>
+        <td>
+          <video controls>
+            <source src="assets/drift-turn-tpair.mp4" type="video/mp4">
+          </video>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <video controls>
+            <source src="assets/india-our.mp4" type="video/mp4">
+          </video>
+        </td>
+        <td>
+          <video controls>
+            <source src="assets/india-tpair.mp4" type="video/mp4">
+          </video>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <video controls>
+            <source src="assets/lab-coat-our.mp4" type="video/mp4">
+          </video>
+        </td>
+        <td>
+          <video controls>
+            <source src="assets/lab-coat-tpair.mp4" type="video/mp4">
+          </video>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <video controls>
+            <source src="assets/mbike-trick-our.mp4" type="video/mp4">
+          </video>
+        </td>
+        <td>
+          <video controls>
+            <source src="assets/mbike-trick-tpair.mp4" type="video/mp4">
+          </video>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <video controls>
+            <source src="assets/night-race-our.mp4" type="video/mp4">
+          </video>
+        </td>
+        <td>
+          <video controls>
+            <source src="assets/night-race-tpair.mp4" type="video/mp4">
+          </video>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <video controls>
+            <source src="assets/train-our.mp4" type="video/mp4">
+          </video>
+        </td>
+        <td>
+          <video controls>
+            <source src="assets/train-tpair.mp4" type="video/mp4">
+          </video>
+        </td>
+      </tr>
+
+
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+    </center>
+      </div>
+    </div>
+  </div>
+</section>>
+
+
+
+<!--<section class="section">-->
+<!--  <div class="container is-max-desktop">-->
+<!--    <div class="columns is-centered">-->
+<!--      &lt;!&ndash; Visual Effects. &ndash;&gt;-->
+<!--      <div class="column">-->
+<!--        <div class="content">-->
+<!--          <h2 class="title is-3">Multi-View Deformation Network</h2>-->
+<!--          &lt;!&ndash;          <p>&ndash;&gt;-->
+<!--          &lt;!&ndash;            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect&ndash;&gt;-->
+<!--          &lt;!&ndash;            would be impossible without nerfies since it would require going through a wall.&ndash;&gt;-->
+<!--          &lt;!&ndash;          </p>&ndash;&gt;-->
+<!--          <img src="./static/images/pool_sample.png" width="600"/>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      &lt;!&ndash;/ Visual Effects. &ndash;&gt;-->
+
+<!--      &lt;!&ndash; Matting. &ndash;&gt;-->
+<!--      <div class="column">-->
+<!--        <h2 class="title is-3">Camera Pose Estimation Network</h2>-->
+<!--        <div class="columns is-centered">-->
+<!--          <div class="column content">-->
+<!--            <img src="./static/images/camnet.png">-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>
+    @inproceedings{dong2025online,
+      title={Online Dense Point Tracking with Streaming Memory},
+      author={Dong, Qiaole and Fu, Yanwei},
+      booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+      year={2025}
+    }
+    </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/abs/2503.06471">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/DQiaole/SPOT" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

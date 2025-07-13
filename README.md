@@ -1,10 +1,10 @@
 # SPOT
-### [Paper](https://arxiv.org/abs/2503.06471)
+### [Paper](https://arxiv.org/abs/2503.06471) | [Project Page](https://dqiaole.github.io/SPOT/)
 > [**Online Dense Point Tracking with Streaming Memory**](https://arxiv.org/abs/2503.06471)            
 > Qiaole Dong, Yanwei Fu        
 > **ICCV 2025**
 
-<video src="assets/night-race-our.mp4" autoplay="true" controls="controls" width="856" height="480"></video>
+![demo](./assets/night-race-our.gif)
 
 ## TODO
 
